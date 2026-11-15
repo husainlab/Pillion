@@ -1,6 +1,6 @@
 {
   "name": "pillion",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "index.ts",
   "private": true,
   "packageManager": "pnpm@12.16.1",
