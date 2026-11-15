@@ -140,6 +140,7 @@ jobs:
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
         run: |
           RELEASE_VER="${{ steps.push_release.outputs.release_ver }}"
           TAG="v${RELEASE_VER}"
@@ -151,11 +152,13 @@ jobs:
               "/tmp/Pillion-${RELEASE_VER}.apk" \
               "/tmp/Pillion-release.apk" \
               --clobber
+            gh release edit "$TAG" --draft=false --latest
           else
             gh release create "$TAG" \
               "/tmp/Pillion-${RELEASE_VER}.apk" \
               "/tmp/Pillion-release.apk" \
               --title "Pillion ${RELEASE_VER}" \
-              --notes "Production signed APK for Pillion ${RELEASE_VER}"
+              --notes "Production signed APK for Pillion ${RELEASE_VER}" \
+              --latest
           fi
 
